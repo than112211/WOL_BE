@@ -31,7 +31,8 @@ class LectureController{
         .catch(next)
     }
     all(req,res,next){
-        Lecture.find({},function(err,lecture){
+    
+        Lecture.find({title : {$regex : new RegExp (req.query.name,'i')}},function(err,lecture){
             if(!err)  {
                 res.json(lecture);
                 console.log(lecture)
@@ -39,13 +40,13 @@ class LectureController{
             else
             res.json({message:'Không tìm thấy'})
         });
-    }
+       }
     me(req,res,next){
         const token = req.header('auth-token')
         const data = jwt.verify(token, process.env.JWT_KEY)
         User.findOne({email: data.email,token: token })
         .then(user => 
-            Lecture.find({id_user:user._id},function(err,lecture){
+            Lecture.find({id_user:user._id,title : {$regex : new RegExp (req.query.name,'i')}},function(err,lecture){
                     if(!err)
                         res.json(lecture)}))
         .catch(next)
@@ -89,7 +90,8 @@ class LectureController{
                 var leanerCourse = []
 
                for (let i = 0 ; i < user.course_bought.length;i++){
-                   Lecture.findOne({_id:user.course_bought[i]})
+                   Lecture.findOne({_id:user.course_bought[i],title : {$regex : new RegExp (req.query.name,'i')}}
+                   )
                     .then(lecture =>{
                        if(lecture) {
                         leanerCourse.push(lecture)

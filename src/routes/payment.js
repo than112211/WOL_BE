@@ -8,9 +8,6 @@ router.post('/buy',paymentControllers.buy);
 router.get('/result_buy',paymentControllers.result_buy);
 router.post('/coin',paymentControllers.coin);
 
-router.post('/pr1',paymentControllers.pr1);
-router.get('/result_pr1',paymentControllers.result_pr1);
-
 
 
 

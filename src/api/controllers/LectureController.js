@@ -34,6 +34,7 @@ class LectureController{
         Lecture.find({},function(err,lecture){
             if(!err)  {
                 res.json(lecture);
+                console.log(lecture)
             }
             else
             res.json({message:'Không tìm thấy'})
@@ -59,6 +60,13 @@ class LectureController{
             .catch(next)
 
     }
+    delete(req,res,next) {
+    Lecture.deleteOne({_id: req.params.id })
+    .then(() => {
+        res.json("Deleted")
+    })
+    .catch(next)
+}
     myvideo(req,res,next) {
         const token = req.header('auth-token')
         const data = jwt.verify(token, process.env.JWT_KEY)
@@ -83,11 +91,17 @@ class LectureController{
                for (let i = 0 ; i < user.course_bought.length;i++){
                    Lecture.findOne({_id:user.course_bought[i]})
                     .then(lecture =>{
+                       if(lecture) {
                         leanerCourse.push(lecture)
                         console.log('Đang tìm....')
-                        if(leanerCourse.length == user.course_bought.length){
-                            res.json(leanerCourse)
-                        }
+                            if(leanerCourse.length == user.course_bought.length){
+                                res.json(leanerCourse)
+                            }
+                       }
+                       else{
+                           user.course_bought.splice(i,1)
+                           user.save()
+                       }
                     })
                }
 

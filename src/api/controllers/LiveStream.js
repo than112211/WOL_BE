@@ -29,10 +29,19 @@ class LivestreamController{
         const data = jwt.verify(token, process.env.JWT_KEY)
         User.findOne({email:data.email,token:token}) // điều kiện , formdata là các bản ghi để sữa
         .then(user => {
-          
+            res.json(req.params.room)
         })
         .catch(next)
     
+    }
+    all(req,res,next){
+        Live.find({},function(err,live){
+            if(!err)  {
+                res.json(live);
+            }
+            else
+            res.json({message:'Không tìm thấy'})
+        });
     }
   
 }

@@ -22,6 +22,7 @@ router.put('/update',userControllers.update);
 router.get('/me',userControllers.me);
 router.post('/logout',userControllers.logout);
 router.post('/logoutall',userControllers.logoutall);
+router.get('/detail/:id',userControllers.user);
 router.post('/avartar',upload.single('avartar'),userControllers.avartar);
 
 // router.get('/verify',authControllers.verify);

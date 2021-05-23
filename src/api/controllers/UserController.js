@@ -98,6 +98,11 @@ class UserController{
        
         
      }
+     user(req,res,next){
+        User.findOne({_id: req.params.id})
+        .then(user => res.json(user) )
+        .catch( next)
+     }
      // POST account/logout  1 device
      logout(req,res,next){
         const token = req.header('auth-token')

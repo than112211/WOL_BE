@@ -20,6 +20,7 @@ router.get('/me/:id',lectureControllers.detail);
 router.get('/myvideo/:id',lectureControllers.myvideo);
 router.get('/leaner/me',lectureControllers.myvideolearner);
 router.post('/edit/:id',lectureControllers.edit);
+router.delete('/delete/:id',lectureControllers.delete);
 
 
 

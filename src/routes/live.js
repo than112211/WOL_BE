@@ -3,7 +3,8 @@ const router =express.Router();
 const liveController= require('../api/controllers/LiveStream');
 
 router.post('/create',liveController.create);
-router.post('/join/:id',liveController.join);
+router.get('/all',liveController.all);
+router.get('/join/:room',liveController.join);
 
 
 

@@ -178,12 +178,12 @@ coin(req,res,next){
                   console.log(teacher)
                   console.log(lecture.price)
                   teacher.save()
-                  res.json('TT thành công')
+                  res.json('Mua thành công')
 
             })
           })
       }
-      else res.json('het tien')
+      else res.json('Vui lòng nạp thêm tiền')
   })
   .catch(next)
 

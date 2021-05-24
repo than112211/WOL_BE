@@ -13,7 +13,7 @@ class UserController{
         User.findOne({email:req.body.email})
             .then(user =>{
                 if(user){
-                    res.json({message:'Email đã đc sử dụng'})
+                    res.json('Email đã đc sử dụng')
                     }
                 else{
         bcrypt.hash(req.body.password,10,function(err,hashedPass){
@@ -40,7 +40,7 @@ class UserController{
                 <a href="http://${req.headers.host}/account/verify?token=${user.token}">Vui lòng nhấn vào đây để xác nhận</a>`,
               }
             sgMail.send(msg)
-            .then(() => res.json({message:'Đăng kí thành công'}))
+            .then(() => res.json('Đăng kí thành công'))
             .catch(next)          
         })
     }})

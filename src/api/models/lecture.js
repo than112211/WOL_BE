@@ -12,6 +12,20 @@ const Lecture= new Schema({
     price:Number,
     bought:Number,
     level:String,
+
+
+    // comments: [{
+    //   id_user:Schema.Types.ObjectId,
+    //   comment:{
+    //     comment:String,
+    //     reply:{
+    //       id_user:Schema.Types.ObjectId,
+    //       comment:String
+    //     }
+    //   },
+    // }],
+
+
     date_create:{type: Date,
       default: Date.now }
   })

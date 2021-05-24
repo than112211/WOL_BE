@@ -35,7 +35,6 @@ class LectureController{
         Lecture.find({title : {$regex : new RegExp (req.query.name,'i')}},function(err,lecture){
             if(!err)  {
                 res.json(lecture);
-                console.log(lecture)
             }
             else
             res.json({message:'Không tìm thấy'})
@@ -87,25 +86,27 @@ class LectureController{
         const data = jwt.verify(token, process.env.JWT_KEY)
           User.findOne({email: data.email,token: token })
             .then( user =>{
-                var leanerCourse = []
-
-               for (let i = 0 ; i < user.course_bought.length;i++){
-                   Lecture.findOne({_id:user.course_bought[i],title : {$regex : new RegExp (req.query.name,'i')}}
-                   )
-                    .then(lecture =>{
-                       if(lecture) {
-                        leanerCourse.push(lecture)
-                        console.log('Đang tìm....')
+                console.log(user.course_bought)
+                let leanerCourse = []
+                for (let i = 0 ; i < user.course_bought.length;i++){
+                    Lecture.findOne({_id:user.course_bought[i],title : {$regex : new RegExp (req.query.name,'i')}}
+                    )
+                     .then(lecture =>{
+                         console.log(lecture)
+                        if(lecture !== null) {
+                            console.log('runnnnnn')
+                            leanerCourse.push(lecture)
                             if(leanerCourse.length == user.course_bought.length){
-                                res.json(leanerCourse)
+                                 res.json(leanerCourse)
                             }
-                       }
-                       else{
-                           user.course_bought.splice(i,1)
-                           user.save()
-                       }
-                    })
-               }
+                        }
+                        else{
+                            user.course_bought.splice(i,1)
+                            user.save()
+                        }
+                     })
+                }
+               
 
             })
             .catch(next)

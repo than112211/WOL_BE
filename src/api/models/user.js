@@ -15,6 +15,7 @@ const User= new Schema({
     gender:Boolean, // true là nam , false nữ
     dob:Date,
     coin:Number,
+    admin:Boolean,
     course_bought:[],
   });
 

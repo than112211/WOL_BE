@@ -22,6 +22,7 @@ class UserController{
             }
             req.body.avatar ='/defaultAvartar.png'
             req.body.coin=0
+            req.body.reported=0
             req.body.follow=0
             req.body.password = hashedPass
             req.body.isVerify =false
@@ -30,14 +31,12 @@ class UserController{
             user.save()
             // gữi email
             const msg = {
-                
                 to: user.email, // Change to your recipient
-                from: 'than123456qwe@gmail.com', // Change to your verified sender
-                subject: 'Xác minh tài khoản Le Do Cinema',      
+                from: 'thannguyenle77@gmail.com', // Change to your verified sender
+                subject: 'Chào mừng thành viên đến với WOL',      
                 html: `<h4>Xin chào ${req.body.name},</h4>
-                <p>Chúc mừng bạn trở thành thành viên Lê Độ Cinema - Tích điểm ngay nhận quà liền tay.
-                Bạn có thể đăng nhập dễ dàng vào tài khoản Galaxy để cập nhập các chương trình ưu đãi đặc biệt dành riêng cho bạn </p>
-                <a href="http://${req.headers.host}/account/verify?token=${user.token}">Vui lòng nhấn vào đây để xác nhận</a>`,
+                <p>Chúc mừng bạn trở thành thành viên WOL.
+                Bạn có thể đăng nhập dễ dàng vào tài khoản WOL để </p>`,
               }
             sgMail.send(msg)
             .then(() => res.json('Đăng kí thành công'))
@@ -57,7 +56,7 @@ class UserController{
                     }
                     if(result){
                        var token = jwt.sign({email: user.email},process.env.JWT_KEY)                         
-                        res.json({message:'Đăng nhập thành công',token:token,role:user.role})
+                        res.json({message:'Đăng nhập thành công',token:token,role:user.role,admin:user.admin})
                         user.token=token
                         user.save()                
                     }

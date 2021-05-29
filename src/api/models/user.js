@@ -10,6 +10,7 @@ const User= new Schema({
     isVerify:Boolean,
     role:Boolean, // true là học sinh , false giáo viên
     follow:Number,
+    reported:Number,
     email:String,
     password:String,
     gender:Boolean, // true là nam , false nữ

@@ -15,6 +15,12 @@ const User= new Schema({
     password:String,
     gender:Boolean, // true là nam , false nữ
     dob:Date,
+    ban:{
+      baned:Boolean,
+      day:Number,
+      start:{type: Date,
+        default: Date.now }
+    },
     coin:Number,
     admin:Boolean,
     course_bought:[],

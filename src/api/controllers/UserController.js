@@ -22,6 +22,10 @@ class UserController{
             }
             req.body.avatar ='/defaultAvartar.png'
             req.body.coin=0
+            req.body.ban = {
+                baned : false,
+                day:0
+            }
             req.body.reported=0
             req.body.follow=0
             req.body.password = hashedPass

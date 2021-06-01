@@ -10,14 +10,17 @@ const User= new Schema({
     isVerify:Boolean,
     role:Boolean, // true là học sinh , false giáo viên
     follow:Number,
-    reported:Number,
+    reported:{type: Number,
+      default:0 },
     email:String,
     password:String,
     gender:Boolean, // true là nam , false nữ
     dob:Date,
     ban:{
-      baned:Boolean,
-      day:Number,
+      baned:{type: Boolean,
+        default: false },
+      day:{type: Number,
+        default:0 },
       start:{type: Date,
         default: Date.now }
     },

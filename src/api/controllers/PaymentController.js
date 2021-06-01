@@ -69,7 +69,7 @@ class PaymentController{
         User.findOne({_id:req.query.requestId})
         .then(user =>{
             if(req.query.errorCode==0){
-                user.coin = user.coin + req.query.amount
+                user.coin = user.coin + parseInt(req.query.amount)
                 user.save()
                 res.redirect('http://localhost:4200/')
             }

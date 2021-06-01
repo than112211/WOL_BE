@@ -38,9 +38,17 @@ class UserController{
                 to: user.email, // Change to your recipient
                 from: 'thannguyenle77@gmail.com', // Change to your verified sender
                 subject: 'Chào mừng thành viên đến với WOL',      
-                html: `<h4>Xin chào ${req.body.name},</h4>
+                html: `<h4> HỆ THỐNG HỌC TIẾNG ANH TRỰC TUYẾN WAOEL </h4>
+                <h4>Xin chào ${req.body.name},</h4>
                 <p>Chúc mừng bạn trở thành thành viên WOL.
-                Bạn có thể đăng nhập dễ dàng vào tài khoản WOL để </p>`,
+                Bạn có thể đăng nhập dễ dàng vào tài khoản WOL để có thể sửa dụng các dịch vụ giảng dạy trực tuyến của chúng tôi </p>
+                </br><p>Các tính năng và lợi ích nổi bật của hệ thống:</p>
+                </br><p>Đăng tải video bài học không giới hạn</p>
+                </br><p>Đăng tải bộ bài tập câu hỏi trắc nghiệm cực kì đơn giản mà hiệu quả</p>
+                </br><p>Giá thành của bài giảng do bạn quyết định</p>
+                </br><p>Ngoài ra chúng tôi còn đang phát triển thêm nhiều tính năng như livestream, video call,...</p>
+                </br>
+                </br><p>Mọi thắc mắc, hãy liên hệ với chúng tôi qua email: thannguyenle77@gmail.com để được tư vấn và giải đáp các thắc mắc</p>`,
               }
             sgMail.send(msg)
             .then(() => res.json('Đăng kí thành công'))
@@ -212,6 +220,13 @@ class UserController{
         .catch(next)
          
      
+}
+edit(req,res,next) {
+    User.updateOne({_id:req.body.id},req.body) // điều kiện , formdata là các bản ghi để sữa
+    .then( ()=> {
+       res.json('Đã cập nhật')
+    })
+    .catch(next)
 }
 }
 module.exports = new UserController;

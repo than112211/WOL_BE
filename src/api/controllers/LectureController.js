@@ -3,6 +3,7 @@ const User = require('../models/user')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const lecture = require('../models/lecture')
+const e = require('express')
 require('dotenv').config()
 
 
@@ -12,14 +13,21 @@ class LectureController{
         const data = jwt.verify(token, process.env.JWT_KEY)
         User.findOne({email:data.email,token:token}) // điều kiện , formdata là các bản ghi để sữa
         .then(user => {
-            req.body.id_user=user._id
+            const file = req.file.path.split('.').slice(1,2)
+            if( file == "mp3" || file ==  "mp4" ||  file == "flv" ||  file== "mov" || file == "wmv" || file =="avi"){
+                req.body.id_user=user._id
             req.body.liked=[]
             req.body.dislike=[]
             req.body.bought=0
             req.body.video=req.file.path.split('\\').pop().split('/').pop()
+            console.log(req.file.path)
             const lecture = new Lecture(req.body)
             lecture.save();
-            res.json(req.body)
+            res.json('Tạo thành công')
+            }
+            else {
+                res.json('Vui lòng chọn file video')
+            }
         })
         .catch(next)
     }

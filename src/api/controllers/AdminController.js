@@ -73,6 +73,17 @@ delete(req,res,next) {
     })
     .catch(next)
 }
+unlock(req,res,next) {
+    User.findOne({_id: req.body.id })
+    .then((user) => {
+        user.ban.baned = false
+        user.ban.day = 0
+        user.ban.start = Date.now()
+        user.save()
+        res.json('Mở khóa thành công')
+    })
+    .catch(next)
+}
 ban(req,res,next) {
     User.findOne({_id: req.body.id })
     .then(user => {

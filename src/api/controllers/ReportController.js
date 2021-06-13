@@ -57,8 +57,11 @@ class ReportController{
                             res.json('Báo cáo thành công')
                         }
                    })
+                   .catch(next)
                })
+               .catch(next)
             })
+            .catch(next)
         })
         .catch(next)
     

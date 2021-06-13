@@ -73,6 +73,10 @@ class PaymentController{
                 user.save()
                 res.redirect('http://localhost:4200/')
             }
+             else {
+              res.redirect('http://localhost:4200/')
+
+             }
         })
         .catch(next)
 
@@ -149,6 +153,9 @@ class PaymentController{
                     teacher.save()
               })
             })
+        }
+        else{
+          res.redirect('http://localhost:4200')
         }
     })
     .catch(next)
